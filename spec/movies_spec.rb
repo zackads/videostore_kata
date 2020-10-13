@@ -72,4 +72,40 @@ RSpec.describe 'NewReleaseMovie' do
   end
 end
 
+RSpec.describe 'ChildrenMovie' do
+  context 'When created' do
+    it 'remembers its name' do
+      expect(ChildrenMovie.new('Frozen').name).to eq('Frozen')
+    end
+  end
 
+  context 'calculate costs' do
+    it 'calculates costs rentals of different lengths' do
+      expectations = [
+        { rental_length: 1, cost: 1.5 },
+        { rental_length: 3, cost: 1.5 },
+        { rental_length: 4, cost: 3 },
+        { rental_length: 5, cost: 4.5 },
+        { rental_length: 13, cost: 16.5 }
+      ]
+      movie = ChildrenMovie.new('Frozen')
+      expectations.each do |test_case|
+        expect(movie.calculate_cost(test_case[:rental_length])).to eq(test_case[:cost])
+      end
+    end
+  end
+
+  context 'calculate points' do
+    it 'calculates points for a one-day rental' do
+      expectations = [
+        { rental_length: 1, points: 1 },
+        { rental_length: 2, points: 1 },
+        { rental_length: 996, points: 1 }
+      ]
+      movie = ChildrenMovie.new('Frozen')
+      expectations.each do |test_case|
+        expect(movie.calculate_points(test_case[:rental_length])).to eq(test_case[:points])
+      end
+    end
+  end
+end

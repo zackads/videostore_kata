@@ -1,10 +1,12 @@
 class Rentals
-  def initialize(customer_name, rentals = [])
+  attr_reader :customer_name
+
+  def initialize(customer_name: '', movies: [])
     @customer_name = customer_name
-    @rentals = rentals
+    @rentals = movies
   end
 
   def movies
-    []
+    @rentals
   end
 end
